@@ -3,6 +3,7 @@ package internals
 import (
 	"encoding/hex"
 	"fmt"
+	"math/big"
 )
 
 func HexDecoder(hexString string) ([]byte, error) {
@@ -20,4 +21,23 @@ func AsciiDecoder(stringToDecode []byte) string {
 		decodedString += string(character)
 	}
 	return decodedString
+}
+
+func LongNumDecoder(stringToDecode big.Int) string{
+	b := stringToDecode.Bytes()
+	return AsciiDecoder(b)
+}
+
+func XorCalc (b1,b2 []byte)  (result []byte){
+	if len(b1) != len(b2){
+		fmt.Println("Not same lenght")
+		result = []byte(nil) 
+		return 
+	}else{
+	for i,v := range b1{
+		key := v ^ b2[i]
+		result = append(result,key)
+	}	
+	}
+	return
 }
