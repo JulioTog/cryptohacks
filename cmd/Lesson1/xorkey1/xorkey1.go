@@ -1,7 +1,7 @@
 package main
 
 import (
-	"JulioTog/CryptohacksCode/internals"
+	"JulioTog/CryptohacksCode/utils"
 	"encoding/hex"
 	"fmt"
 	"math"
@@ -15,8 +15,8 @@ func main() {
 
 	normalizedByte := make([]byte, len(b1))
 	copy(normalizedByte, alwaysInit)
-	result := internals.XorCalc(b1, normalizedByte)
-	fmt.Println(internals.AsciiDecoder(result[:7]))
+	result := utils.XorCalc(b1, normalizedByte)
+	fmt.Println(utils.AsciiDecoder(result[:7]))
 
 	key := result[:7]
 	key = append(key, 'y')
@@ -25,6 +25,6 @@ func main() {
 		key2[i] = key[int(math.Mod(float64(i), float64(len(key))))]
 	}
 
-	message := internals.XorCalc(key2, b1)
-	fmt.Println(internals.AsciiDecoder(message))
+	message := utils.XorCalc(key2, b1)
+	fmt.Println(utils.AsciiDecoder(message))
 }

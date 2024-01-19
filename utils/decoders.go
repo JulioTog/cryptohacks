@@ -1,4 +1,4 @@
-package internals
+package utils
 
 import (
 	"encoding/hex"
@@ -7,13 +7,13 @@ import (
 	"strings"
 )
 
-func HexDecoder(hexString string) ([]byte, error) {
+func HexDecoder(hexString string) (string, error) {
 	ascii, err := hex.DecodeString(hexString)
 	if err != nil {
 		fmt.Printf("Error decoding hex")
-		return nil, err
+		return "", err
 	}
-	return ascii, err
+	return AsciiDecoder(ascii), err
 }
 
 func AsciiDecoder(stringToDecode []byte) string {
